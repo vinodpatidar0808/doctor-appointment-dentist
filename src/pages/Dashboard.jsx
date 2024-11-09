@@ -20,23 +20,12 @@ const Dashboard = () => {
   const [timeSlots, setTimeSlots] = useState([]);
   const [selectedSlots, setSelectedSlots] = useState({ start: "", end: "" });
 
-  const [events, setEvents] = useState([
-    {
-      title: "Meeting ",
-      start: new Date(2024, 10, 6, 9, 0), // November 6, 2024, 9:00 AM
-      end: new Date(2024, 10, 6, 12, 0),  // November 6, 2024, 12:00 PM
-    },
-    {
-      title: "Lunch Break",
-      start: new Date(2024, 10, 6, 12, 30), // November 6, 2024, 12:30 PM
-      end: new Date(2024, 10, 6, 13, 30),   // November 6, 2024, 1:30 PM
-    },
-  ]);
+  const [events, setEvents] = useState([]);
 
   const getAppointments = async () => {
     const user = JSON.parse(sessionStorage.getItem('user'))
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/patient/appointments/${user._id}`, {
+      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/dentist/appointments/${user._id}`, {
         headers: {
           'Authorization': `${sessionStorage.getItem('authToken')}`
         }
@@ -49,6 +38,7 @@ const Dashboard = () => {
           return {
             amount: appointment.amount,
             title: appointment.title,
+            _id: appointment._id,
             start: new Date(year, month - 1, day, startHour, startMinutes),
             end: new Date(year, month - 1, day, endHour, endMinutes),
           }
@@ -137,7 +127,7 @@ const Dashboard = () => {
         view={calenderView}
         defaultView="month"
         selectable
-        onSelectSlot={handleSelectSlot}
+        // onSelectSlot={handleSelectSlot}
         step={60}
         timeslots={1}
         min={new Date(1970, 1, 1, 8, 30)} // Set the minimum time to 8:30 AM, in week view calender
