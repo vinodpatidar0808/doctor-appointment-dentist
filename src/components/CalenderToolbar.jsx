@@ -31,7 +31,7 @@ const CalendarToolbar = (props) => {
           >
             &lt;
           </button>
-          {month}
+          <span className="cursor-pointer" onClick={() => props.setCalenderView("month")}>{month}</span>
           <button
             onClick={goToNext}
             className=" px-1 "
@@ -39,7 +39,7 @@ const CalendarToolbar = (props) => {
             &gt;
           </button>
         </div>
-        <button className=" px-8  py-1 border border-b-0 ">
+        <button className=" px-8  py-1 border border-b-0 " onClick={() => props.setCalenderView(curr => curr === "week" ? "month" : "week")}>
           Booking History
         </button>
       </div>
