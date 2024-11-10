@@ -5,6 +5,7 @@ import './App.css'
 import MainLayout from "./components/MainLayout"
 import Dashboard from "./pages/Dashboard"
 import Login from "./pages/Login"
+import PrivateRoute from "./pages/PrivateRoute"
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<PrivateRoute> <MainLayout /> </PrivateRoute>}>
           <Route index path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
